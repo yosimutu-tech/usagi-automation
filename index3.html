@@ -673,7 +673,7 @@ deliver()”></textarea>
   function animateChar(cls) {
     const ch = document.getElementById("character");
     ch.classList.remove("delivering", "resting");
-    void ch.offsetWidth; // reflow
+    ch.getBoundingClientRect(); // reflow
     ch.classList.add(cls);
     setTimeout(() => ch.classList.remove(cls), 1000);
   }
