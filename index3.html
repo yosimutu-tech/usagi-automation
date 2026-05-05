@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
@@ -11,368 +10,385 @@
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pink:    #ff8fab;
-      --pink2:   #ffd6e0;
-      --peach:   #fdf0e0;
-      --cream:   #fffaf5;
-      --mint:    #c3f0ca;
-      --mint2:   #a8e6b0;
-      --yellow:  #fff3b0;
-      --brown:   #8b5e3c;
-      --shadow:  rgba(255,143,171,0.25);
+      --pink:   #ff8fab;
+      --pink2:  #ffd6e0;
+      --peach:  #fdf0e0;
+      --mint:   #c3f0ca;
+      --mint2:  #a8e6b0;
+      --yellow: #fff3b0;
+      --gold:   #f5a623;
+      --brown:  #8b5e3c;
+      --purple: #d4b8f0;
+      --purple2:#a855f7;
+      --shadow: rgba(255,143,171,0.25);
     }
 
-```
-* { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  background: var(--peach);
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px 10px 40px;
-}
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      background: var(--peach);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px 10px 40px;
+    }
 
-.app {
-  width: 100%;
-  max-width: 480px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+    .app {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
-/* ========== タイトル ========== */
-h1 {
-  font-family: 'Zen Maru Gothic', sans-serif;
-  font-size: 1.5rem;
-  color: var(--pink);
-  text-align: center;
-  text-shadow: 0 2px 8px var(--shadow);
-  letter-spacing: 0.05em;
-}
+    h1 {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 1.5rem;
+      color: var(--pink);
+      text-align: center;
+      text-shadow: 0 2px 8px var(--shadow);
+    }
 
-/* ========== ステータス ========== */
-.status {
-  background: white;
-  border-radius: 20px;
-  padding: 14px 20px;
-  display: flex;
-  justify-content: space-around;
-  box-shadow: 0 4px 16px var(--shadow);
-}
+    .status {
+      background: white;
+      border-radius: 20px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 16px var(--shadow);
+    }
 
-.stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
+    .status-top {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 12px;
+    }
 
-.stat-label {
-  font-size: 0.75rem;
-  color: #aaa;
-}
+    .stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .stat-label { font-size: 0.72rem; color: #bbb; }
+    .stat-value { font-size: 1.4rem; font-weight: 700; color: var(--brown); }
 
-.stat-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--brown);
-}
+    .level-section { padding: 0 4px; }
 
-/* エネルギーバー */
-.energy-bar-wrap {
-  background: #eee;
-  border-radius: 20px;
-  height: 10px;
-  width: 100px;
-  overflow: hidden;
-  margin-top: 2px;
-}
+    .level-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: #999;
+      margin-bottom: 4px;
+    }
 
-.energy-bar {
-  height: 100%;
-  border-radius: 20px;
-  background: linear-gradient(90deg, var(--mint2), #5ecb68);
-  transition: width 0.4s ease;
-}
+    .level-header strong { color: var(--purple2); }
 
-/* ========== キャラクター ========== */
-.scene {
-  background: white;
-  border-radius: 24px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 20px var(--shadow);
-  position: relative;
-  overflow: hidden;
-}
+    .bar-wrap {
+      background: #f0e8f8;
+      border-radius: 20px;
+      height: 12px;
+      overflow: hidden;
+    }
 
-.scene-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, #fff8f0 0%, #fff0f5 100%);
-  z-index: 0;
-}
+    .bar-fill { height: 100%; border-radius: 20px; transition: width 0.5s ease; }
+    .xp-bar     { background: linear-gradient(90deg, var(--purple), var(--purple2)); }
+    .energy-bar { background: linear-gradient(90deg, var(--mint2), #5ecb68); }
 
-.road {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 30px;
-  background: repeating-linear-gradient(
-    90deg,
-    #f0e0d0 0px, #f0e0d0 40px,
-    #e8d0c0 40px, #e8d0c0 80px
-  );
-  border-top: 2px solid #e0c8b0;
-  z-index: 1;
-}
+    .energy-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: #999;
+      margin: 6px 0 4px;
+    }
 
-.character {
-  font-size: 64px;
-  position: relative;
-  z-index: 2;
-  display: inline-block;
-  animation: idle 2s ease-in-out infinite;
-  transition: transform 0.2s;
-  cursor: pointer;
-  user-select: none;
-}
+    .scene {
+      background: linear-gradient(180deg, #fff8f0 0%, #fff0f5 100%);
+      border-radius: 24px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
 
-.character:hover { transform: scale(1.1); }
+    .road {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 28px;
+      background: repeating-linear-gradient(90deg, #f0e0d0 0px, #f0e0d0 40px, #e8d0c0 40px, #e8d0c0 80px);
+      border-top: 2px solid #e0c8b0;
+    }
 
-.character.delivering {
-  animation: deliver-anim 0.4s ease-in-out;
-}
+    .character {
+      font-size: 64px;
+      display: inline-block;
+      animation: idle 2s ease-in-out infinite;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      z-index: 2;
+    }
 
-.character.resting {
-  animation: rest-anim 1s ease-in-out;
-}
+    @keyframes idle {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
 
-@keyframes idle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
+    .coin-pop {
+      position: absolute;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      z-index: 10;
+      pointer-events: none;
+      animation: coin-fly 1s ease-out forwards;
+    }
 
-@keyframes deliver-anim {
-  0% { transform: translateX(0); }
-  30% { transform: translateX(20px) rotate(5deg); }
-  60% { transform: translateX(-5px) rotate(-2deg); }
-  100% { transform: translateX(0) rotate(0deg); }
-}
+    @keyframes coin-fly {
+      0%   { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-60px) scale(1.4); }
+    }
 
-@keyframes rest-anim {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  75% { transform: rotate(10deg); }
-  100% { transform: rotate(0deg); }
-}
+    .levelup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(168,85,247,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
 
-/* コイン演出 */
-.coin-pop {
-  position: absolute;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #f5a623;
-  z-index: 10;
-  pointer-events: none;
-  animation: coin-fly 1s ease-out forwards;
-}
+    .levelup-overlay.show { opacity: 1; }
 
-@keyframes coin-fly {
-  0% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-60px) scale(1.4); }
-}
+    .levelup-card {
+      background: white;
+      border-radius: 28px;
+      padding: 30px 40px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(168,85,247,0.3);
+      transform: scale(0.8);
+      transition: transform 0.3s;
+    }
 
-/* ========== ボタン ========== */
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
+    .levelup-overlay.show .levelup-card { transform: scale(1); }
+    .levelup-card h2 { font-size: 2rem; color: var(--purple2); margin-bottom: 8px; }
+    .levelup-card p  { color: #888; font-size: 0.9rem; }
 
-.btn {
-  padding: 14px 8px;
-  border: none;
-  border-radius: 18px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-}
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+    }
 
-.btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
-}
+    .btn {
+      padding: 12px 6px;
+      border: none;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    }
 
-.btn-deliver { background: var(--pink2); color: #c45c7a; }
-.btn-rest    { background: var(--mint);  color: #3a7a45; }
-.btn-code    { background: var(--yellow); color: #7a6c00; }
+    .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
 
-/* ========== ミッション ========== */
-.missions {
-  background: white;
-  border-radius: 20px;
-  padding: 14px 18px;
-  box-shadow: 0 4px 16px var(--shadow);
-}
+    .btn-deliver { background: var(--pink2);  color: #c45c7a; }
+    .btn-rest    { background: var(--mint);   color: #3a7a45; }
+    .btn-code    { background: var(--yellow); color: #7a6c00; }
+    .btn-shop    { background: var(--purple); color: #6b21a8; }
+    .btn-shop.locked { background: #eee; color: #bbb; cursor: default; }
 
-.missions h2 {
-  font-size: 0.85rem;
-  color: #bbb;
-  margin-bottom: 10px;
-  letter-spacing: 0.08em;
-}
+    .shop-section {
+      background: white;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 4px 16px var(--shadow);
+      display: none;
+    }
 
-.mission {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px dashed #f0e0e8;
-  font-size: 0.88rem;
-  color: #555;
-}
+    .shop-section.open { display: block; }
+    .shop-title { font-size: 1rem; font-weight: 700; color: var(--purple2); margin-bottom: 12px; text-align: center; }
 
-.mission:last-child { border-bottom: none; }
+    .shop-locked { text-align: center; color: #bbb; font-size: 0.85rem; padding: 16px 0; }
 
-.mission-check {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  border: 2px solid #ffd6e0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.75rem;
-  flex-shrink: 0;
-  transition: background 0.3s;
-}
+    .shop-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #faf5ff;
+      margin-bottom: 8px;
+    }
 
-.mission.done .mission-check {
-  background: var(--pink);
-  border-color: var(--pink);
-  color: white;
-}
+    .shop-item:last-child { margin-bottom: 0; }
+    .shop-icon { font-size: 2rem; flex-shrink: 0; }
+    .shop-info { flex: 1; }
+    .shop-name { font-size: 0.9rem; font-weight: 700; color: var(--brown); }
+    .shop-desc { font-size: 0.75rem; color: #aaa; margin-top: 2px; }
 
-.mission.done .mission-text { text-decoration: line-through; color: #bbb; }
+    .shop-buy {
+      background: linear-gradient(135deg, var(--purple), var(--purple2));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
 
-/* ========== コードエリア ========== */
-.code-section {
-  background: #1e1e2e;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  display: none;
-}
+    .shop-buy:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.code-section.open { display: block; }
+    .owned-badge {
+      background: var(--mint);
+      color: #3a7a45;
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
 
-.code-header {
-  background: #2a2a3e;
-  padding: 10px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .missions {
+      background: white;
+      border-radius: 20px;
+      padding: 14px 18px;
+      box-shadow: 0 4px 16px var(--shadow);
+    }
 
-.code-header span {
-  font-family: monospace;
-  font-size: 0.8rem;
-  color: #888;
-}
+    .missions h2 { font-size: 0.85rem; color: #bbb; margin-bottom: 10px; }
 
-.code-dots {
-  display: flex; gap: 6px;
-}
+    .mission {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px dashed #f0e0e8;
+      font-size: 0.85rem;
+      color: #555;
+    }
 
-.code-dot {
-  width: 10px; height: 10px; border-radius: 50%;
-}
+    .mission:last-child { border-bottom: none; }
 
-.hint-box {
-  background: #2a2a3e;
-  padding: 8px 16px;
-  border-left: 3px solid var(--pink);
-}
+    .mission-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid #ffd6e0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
 
-.hint-box p {
-  font-family: 'Courier New', monospace;
-  font-size: 0.78rem;
-  color: #aaa;
-  line-height: 1.6;
-}
+    .mission.done .mission-check { background: var(--pink); border-color: var(--pink); color: white; }
+    .mission.done .mission-text  { text-decoration: line-through; color: #bbb; }
 
-.hint-box .hl { color: #ff8fab; }
-.hint-box .hl2 { color: #c3f0ca; }
-.hint-box .hl3 { color: #fff3b0; }
+    .code-section {
+      background: #1e1e2e;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      display: none;
+    }
 
-textarea#codeInput {
-  width: 100%;
-  height: 120px;
-  background: #1e1e2e;
-  color: #e0e0ff;
-  border: none;
-  padding: 14px 16px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-  resize: vertical;
-  outline: none;
-  line-height: 1.6;
-}
+    .code-section.open { display: block; }
 
-textarea#codeInput::placeholder { color: #555; }
+    .code-header {
+      background: #2a2a3e;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.code-footer {
-  background: #2a2a3e;
-  padding: 10px 16px;
-  display: flex;
-  justify-content: flex-end;
-}
+    .code-header span { font-family: monospace; font-size: 0.8rem; color: #888; }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot  { width: 10px; height: 10px; border-radius: 50%; }
 
-.btn-run {
-  background: linear-gradient(135deg, var(--pink), #ff6b9d);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 24px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 4px 12px rgba(255,143,171,0.4);
-}
+    .hint-box {
+      background: #2a2a3e;
+      padding: 8px 16px;
+      border-left: 3px solid var(--pink);
+    }
 
-.btn-run:active { transform: scale(0.97); }
+    .hint-box p { font-family: 'Courier New', monospace; font-size: 0.78rem; color: #aaa; line-height: 1.7; }
+    .hl  { color: #ff8fab; }
+    .hl2 { color: #c3f0ca; }
+    .hl3 { color: #fff3b0; }
 
-/* ========== ログ ========== */
-#log {
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--brown);
-  min-height: 28px;
-  padding: 8px;
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px var(--shadow);
-  transition: all 0.3s;
-}
+    textarea#codeInput {
+      width: 100%;
+      height: 120px;
+      background: #1e1e2e;
+      color: #e0e0ff;
+      border: none;
+      padding: 14px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+      outline: none;
+      line-height: 1.6;
+    }
 
-#log.success { background: var(--mint); color: #2d6e35; }
-#log.error   { background: #ffe0e0; color: #c0392b; }
+    textarea#codeInput::placeholder { color: #555; }
 
-/* ========== エラーヒント ========== */
-#errorHint {
-  font-size: 0.8rem;
-  color: #e74c3c;
-  text-align: center;
-  min-height: 16px;
-  padding: 0 8px;
-}
-```
+    .code-footer {
+      background: #2a2a3e;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
 
+    .btn-run {
+      background: linear-gradient(135deg, var(--pink), #ff6b9d);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 24px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255,143,171,0.4);
+    }
+
+    #errorHint { font-size: 0.8rem; color: #e74c3c; text-align: center; min-height: 16px; padding: 4px 8px; }
+
+    #log {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--brown);
+      min-height: 28px;
+      padding: 10px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    #log.success { background: var(--mint);   color: #2d6e35; }
+    #log.error   { background: #ffe0e0;       color: #c0392b; }
+
+    .auto-indicator {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--purple2);
+      display: none;
+      animation: pulse 2s infinite;
+    }
+
+    .auto-indicator.active { display: block; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
+    }
   </style>
 </head>
 <body>
@@ -381,43 +397,58 @@ textarea#codeInput::placeholder { color: #555; }
 
   <h1>🐰 うさぎの自動化日記</h1>
 
-  <!-- ステータス -->
-
   <div class="status">
-    <div class="stat">
-      <span class="stat-label">🌰 コイン</span>
-      <span class="stat-value" id="coin">0</span>
-    </div>
-    <div class="stat">
-      <span class="stat-label">⚡ 体力</span>
-      <span class="stat-value" id="energyNum">100</span>
-      <div class="energy-bar-wrap">
-        <div class="energy-bar" id="energyBar" style="width:100%"></div>
+    <div class="status-top">
+      <div class="stat">
+        <span class="stat-label">🌰 コイン</span>
+        <span class="stat-value" id="coin">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">⭐ レベル</span>
+        <span class="stat-value" id="levelNum">1</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">📦 配達数</span>
+        <span class="stat-value" id="deliveryCount">0</span>
       </div>
     </div>
-    <div class="stat">
-      <span class="stat-label">📦 配達数</span>
-      <span class="stat-value" id="deliveryCount">0</span>
+    <div class="level-section">
+      <div class="level-header">
+        <span>経験値 <strong id="xpText">0 / 10</strong></span>
+        <span id="levelLabel">Lv.1 見習いうさぎ</span>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-fill xp-bar" id="xpBar" style="width:0%"></div>
+      </div>
+      <div class="energy-header">
+        <span>⚡ 体力 <strong id="energyText">100</strong></span>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-fill energy-bar" id="energyBar" style="width:100%"></div>
+      </div>
     </div>
   </div>
 
-  <!-- キャラクター -->
-
   <div class="scene">
-    <div class="scene-bg"></div>
     <div class="road"></div>
     <div class="character" id="character" onclick="deliver()">🐰</div>
   </div>
 
-  <!-- ボタン -->
+  <div class="auto-indicator" id="autoIndicator">⚙️ 自動配達マシン稼働中…</div>
 
   <div class="actions">
     <button class="btn btn-deliver" onclick="deliver()">📦 配達する</button>
     <button class="btn btn-rest"    onclick="rest()">💤 休む</button>
     <button class="btn btn-code"    onclick="openCode()">💻 コード</button>
+    <button class="btn btn-shop locked" id="shopBtn" onclick="openShop()">🔒 ショップ</button>
   </div>
 
-  <!-- ミッション -->
+  <div class="shop-section" id="shopSection">
+    <div class="shop-title">🏪 うさぎショップ</div>
+    <div id="shopContent">
+      <div class="shop-locked">🔒 レベル3でショップが解放されます！</div>
+    </div>
+  </div>
 
   <div class="missions">
     <h2>📋 MISSION</h2>
@@ -435,11 +466,17 @@ textarea#codeInput::placeholder { color: #555; }
     </div>
     <div class="mission" id="m4">
       <div class="mission-check">✓</div>
-      <span class="mission-text">コイン500枚を貯めよう！</span>
+      <span class="mission-text">レベル3になってショップを解放しよう！</span>
+    </div>
+    <div class="mission" id="m5">
+      <div class="mission-check">✓</div>
+      <span class="mission-text">ショップで何か購入しよう🛍️</span>
+    </div>
+    <div class="mission" id="m6">
+      <div class="mission-check">✓</div>
+      <span class="mission-text">レベル5のベテランうさぎになろう！</span>
     </div>
   </div>
-
-  <!-- コードエリア -->
 
   <div class="code-section" id="codeSection">
     <div class="code-header">
@@ -462,104 +499,233 @@ textarea#codeInput::placeholder { color: #555; }
     <textarea id="codeInput" placeholder="# ここにコードを書こう！
 deliver()
 
-# もしくは繰り返し：
-
-for i in range(3):
-deliver()”></textarea>
-<div id="errorHint"></div>
-<div class="code-footer">
-<button class="btn-run" onclick="runCode()">▶ 実行する</button>
-</div>
-
+# 繰り返しはこう書く：
+for i in range(5):
+    deliver()"></textarea>
+    <div id="errorHint"></div>
+    <div class="code-footer">
+      <button class="btn-run" onclick="runCode()">▶ 実行する</button>
+    </div>
   </div>
-
-  <!-- ログ -->
 
   <p id="log">🐰 クリックして配達しよう！</p>
 
 </div>
 
-<script>
-  let coin = 0;
-  let energy = 100;
-  let deliveryCount = 0;
-  const missions = { m1: false, m2: false, m3: false, m4: false };
+<div class="levelup-overlay" id="levelupOverlay">
+  <div class="levelup-card">
+    <h2>🎉 LEVEL UP!</h2>
+    <p id="levelupMsg">レベル2になったよ！</p>
+    <p id="levelupBonus" style="color:#a855f7;font-weight:700;margin-top:8px;"></p>
+  </div>
+</div>
 
-  // ======= UI更新 =======
+<script>
+  var coin = 0;
+  var energy = 100;
+  var deliveryCount = 0;
+  var xp = 0;
+  var level = 1;
+  var autoMachine = false;
+  var autoTimer = null;
+  var shopPurchased = false;
+  var missions = { m1:false, m2:false, m3:false, m4:false, m5:false, m6:false };
+
+  var levelData = [
+    { name:"見習いうさぎ",   xpNeeded:10,  coinBonus:0  },
+    { name:"配達うさぎ",     xpNeeded:25,  coinBonus:10 },
+    { name:"ベテランうさぎ", xpNeeded:50,  coinBonus:20 },
+    { name:"エースうさぎ",   xpNeeded:100, coinBonus:30 },
+    { name:"伝説のうさぎ",   xpNeeded:999, coinBonus:50 }
+  ];
+
+  function currentLevelData() {
+    var idx = Math.min(level - 1, levelData.length - 1);
+    return levelData[idx];
+  }
+
+  function coinPerDelivery() {
+    return 50 + currentLevelData().coinBonus;
+  }
+
   function updateUI() {
     document.getElementById("coin").textContent = coin;
-    document.getElementById("energyNum").textContent = energy;
-    document.getElementById("energyBar").style.width = energy + "%";
+    document.getElementById("levelNum").textContent = level;
     document.getElementById("deliveryCount").textContent = deliveryCount;
+    document.getElementById("energyText").textContent = energy;
+    document.getElementById("energyBar").style.width = energy + "%";
+
+    var ld = currentLevelData();
+    var pct = Math.min(100, Math.floor(xp / ld.xpNeeded * 100));
+    document.getElementById("xpBar").style.width = pct + "%";
+    document.getElementById("xpText").textContent = xp + " / " + ld.xpNeeded;
+    document.getElementById("levelLabel").textContent = "Lv." + level + " " + ld.name;
+
+    var shopBtn = document.getElementById("shopBtn");
+    if (level >= 3) {
+      shopBtn.classList.remove("locked");
+      shopBtn.textContent = "🏪 ショップ";
+    }
+
+    updateShop();
     checkMissions();
   }
 
-  // ======= ミッション =======
-  function checkMissions() {
-    if (!missions.m1 && deliveryCount >= 1) {
-      missions.m1 = true;
-      completeMission("m1");
-    }
-    if (!missions.m4 && coin >= 500) {
-      missions.m4 = true;
-      completeMission("m4");
+  function gainXP(amount) {
+    xp += amount;
+    var ld = currentLevelData();
+    if (level < levelData.length && xp >= ld.xpNeeded) {
+      xp -= ld.xpNeeded;
+      level++;
+      showLevelUp();
     }
   }
 
-  function completeMission(id) {
-    const el = document.getElementById(id);
-    if (el) el.classList.add("done");
+  function showLevelUp() {
+    var ld = currentLevelData();
+    document.getElementById("levelupMsg").textContent = "レベル " + level + " になったよ！✨";
+    var bonusMsg = level >= 3
+      ? "🏪 ショップが解放された！"
+      : "1回の配達コインが増えたよ！（+" + ld.coinBonus + "コイン）";
+    document.getElementById("levelupBonus").textContent = bonusMsg;
+
+    var overlay = document.getElementById("levelupOverlay");
+    overlay.classList.add("show");
+    setTimeout(function() { overlay.classList.remove("show"); }, 2500);
   }
 
-  // ======= 配達 =======
-  function deliver(amount = 1) {
-    let delivered = 0;
-    for (let i = 0; i < amount; i++) {
+  function deliver(amount) {
+    if (amount === undefined) amount = 1;
+    var delivered = 0;
+    for (var i = 0; i < amount; i++) {
       if (energy <= 0) {
         log("🐰 つかれて寝ちゃった…", "error");
         break;
       }
-      coin += 50;
+      var earned = coinPerDelivery();
+      coin += earned;
       energy -= 10;
       if (energy < 0) energy = 0;
       deliveryCount++;
       delivered++;
+      gainXP(1);
     }
     if (delivered > 0) {
-      const msg = amount > 1
-        ? `📦 ${delivered}回配達したよ！ +${delivered * 50}コイン`
-        : "📦 配達したよ！ +50コイン";
+      var total = coinPerDelivery() * delivered;
+      var msg = amount > 1
+        ? "📦 " + delivered + "回配達したよ！ +" + total + "コイン"
+        : "📦 配達したよ！ +" + coinPerDelivery() + "コイン";
       log(msg, "success");
-      animateChar("delivering");
-      showCoinPop(`+${delivered * 50}`);
+      showCoinPop("+" + total);
     }
     updateUI();
   }
 
-  // ======= 休む =======
   function rest() {
     energy = Math.min(100, energy + 20);
     log("💤 ゆっくり休んだよ。体力回復！", "");
-    animateChar("resting");
     updateUI();
   }
 
-  // ======= コードエリア切り替え =======
-  function openCode() {
-    const sec = document.getElementById("codeSection");
-    sec.classList.toggle("open");
-    if (sec.classList.contains("open")) {
-      document.getElementById("codeInput").focus();
+  function openShop() {
+    if (level < 3) {
+      log("🔒 レベル3になるとショップが開くよ！", "error");
+      return;
     }
+    document.getElementById("shopSection").classList.toggle("open");
   }
 
-  // ======= コード実行（Pythonっぽい構文対応）=======
-  function runCode() {
-    const raw = document.getElementById("codeInput").value;
-    document.getElementById("errorHint").textContent = "";
+  function updateShop() {
+    var content = document.getElementById("shopContent");
+    if (level < 3) {
+      content.innerHTML = '<div class="shop-locked">🔒 レベル3でショップが解放されます！<br>あと' + (3 - level) + 'レベル！</div>';
+      return;
+    }
 
+    var drinkDisabled = coin < 100 ? "disabled" : "";
+    var autoDisabled  = coin < 500 ? "disabled" : "";
+    var luckyDisabled = coin < 300 ? "disabled" : "";
+
+    var autoHTML = autoMachine
+      ? '<div class="owned-badge">✅ 稼働中</div>'
+      : '<button class="shop-buy" onclick="buyAutoMachine()" ' + autoDisabled + '>購入</button>';
+
+    content.innerHTML =
+      '<div class="shop-item">' +
+        '<div class="shop-icon">⚡</div>' +
+        '<div class="shop-info">' +
+          '<div class="shop-name">エネルギードリンク</div>' +
+          '<div class="shop-desc">体力を満タンに回復！ 🌰100コイン</div>' +
+        '</div>' +
+        '<button class="shop-buy" onclick="buyEnergyDrink()" ' + drinkDisabled + '>購入</button>' +
+      '</div>' +
+      '<div class="shop-item">' +
+        '<div class="shop-icon">🤖</div>' +
+        '<div class="shop-info">' +
+          '<div class="shop-name">自動配達マシン</div>' +
+          '<div class="shop-desc">3秒ごとに自動で配達！ 🌰500コイン</div>' +
+        '</div>' +
+        autoHTML +
+      '</div>' +
+      '<div class="shop-item">' +
+        '<div class="shop-icon">🎁</div>' +
+        '<div class="shop-info">' +
+          '<div class="shop-name">ラッキーバッグ</div>' +
+          '<div class="shop-desc">100〜1000コインをランダムでGET！ 🌰300コイン</div>' +
+        '</div>' +
+        '<button class="shop-buy" onclick="buyLuckyBag()" ' + luckyDisabled + '>購入</button>' +
+      '</div>';
+  }
+
+  function buyEnergyDrink() {
+    if (coin < 100) return;
+    coin -= 100;
+    energy = 100;
+    shopPurchased = true;
+    log("⚡ 体力が満タンになったよ！", "success");
+    updateUI();
+  }
+
+  function buyAutoMachine() {
+    if (coin < 500 || autoMachine) return;
+    coin -= 500;
+    autoMachine = true;
+    shopPurchased = true;
+    document.getElementById("autoIndicator").classList.add("active");
+    autoTimer = setInterval(function() {
+      if (energy > 0) {
+        coin += coinPerDelivery();
+        energy -= 5;
+        if (energy < 0) energy = 0;
+        deliveryCount++;
+        gainXP(1);
+        updateUI();
+      }
+    }, 3000);
+    log("🤖 自動配達マシンを購入したよ！", "success");
+    updateUI();
+  }
+
+  function buyLuckyBag() {
+    if (coin < 300) return;
+    coin -= 300;
+    shopPurchased = true;
+    var bonus = Math.floor(Math.random() * 901) + 100;
+    coin += bonus;
+    log("🎁 ラッキー！ +" + bonus + "コイン！", "success");
+    showCoinPop("+" + bonus);
+    updateUI();
+  }
+
+  function openCode() {
+    document.getElementById("codeSection").classList.toggle("open");
+  }
+
+  function runCode() {
+    var raw = document.getElementById("codeInput").value;
+    document.getElementById("errorHint").textContent = "";
     try {
-      const result = parsePython(raw);
+      var result = parsePython(raw);
       if (result.error) {
         log("🐰 ちょっとむずかしかったみたい…", "error");
         document.getElementById("errorHint").textContent = "エラー: " + result.error;
@@ -567,140 +733,108 @@ deliver()”></textarea>
       }
       executeCommands(result.commands);
       log("✨ コード成功！うさぎが自動で動いたよ！", "success");
-
-      // ミッションチェック
-      if (!missions.m2 && result.hasDeliverCall) {
-        missions.m2 = true;
-        completeMission("m2");
-      }
-      if (!missions.m3 && result.hasForLoop) {
-        missions.m3 = true;
-        completeMission("m3");
-      }
+      if (!missions.m2 && result.hasDeliverCall) { missions.m2 = true; completeMission("m2"); }
+      if (!missions.m3 && result.hasForLoop)     { missions.m3 = true; completeMission("m3"); }
     } catch(e) {
       log("🐰 ちょっとむずかしかったみたい…", "error");
       document.getElementById("errorHint").textContent = "エラー: " + e.message;
     }
-
     updateUI();
   }
 
-  // ======= Pythonっぽい構文パーサー =======
   function parsePython(code) {
-    const lines = code.split("\n");
-    const commands = [];
-    let hasDeliverCall = false;
-    let hasForLoop = false;
-    let i = 0;
-
+    var lines = code.split("\n");
+    var commands = [];
+    var hasDeliverCall = false;
+    var hasForLoop = false;
+    var i = 0;
     while (i < lines.length) {
-      const line = lines[i];
-      const trimmed = line.trim();
-
-      // コメント・空行スキップ
-      if (!trimmed || trimmed.startsWith("#")) { i++; continue; }
-
-      // for i in range(N): 対応
-      const forMatch = trimmed.match(/^for\s+\w+\s+in\s+range\((\d+)\)\s*:$/);
+      var line = lines[i];
+      var trimmed = line.trim();
+      if (!trimmed || trimmed.charAt(0) === "#") { i++; continue; }
+      var forMatch = trimmed.match(/^for\s+\w+\s+in\s+range\((\d+)\)\s*:$/);
       if (forMatch) {
-        const times = parseInt(forMatch[1]);
-        if (isNaN(times) || times > 100) {
-          return { error: `range(${forMatch[1]}) が大きすぎます（最大100）` };
-        }
+        var times = parseInt(forMatch[1]);
+        if (times > 100) return { error: "range(" + forMatch[1] + ") が大きすぎます（最大100）" };
         hasForLoop = true;
-        const bodyCommands = [];
+        var bodyCommands = [];
         i++;
-
-        // インデントされたボディを収集
         while (i < lines.length) {
-          const bodyLine = lines[i];
-          const bodyTrimmed = bodyLine.trim();
-          if (!bodyTrimmed || bodyTrimmed.startsWith("#")) { i++; continue; }
-          // インデントがない → ループ終了
-          if (bodyLine.length > 0 && bodyLine[0] !== " " && bodyLine[0] !== "\t") break;
-
-          const cmd = parseCommand(bodyTrimmed);
+          var bodyLine = lines[i];
+          var bodyTrimmed = bodyLine.trim();
+          if (!bodyTrimmed || bodyTrimmed.charAt(0) === "#") { i++; continue; }
+          if (bodyLine.length > 0 && bodyLine.charAt(0) !== " " && bodyLine.charAt(0) !== "\t") break;
+          var cmd = parseCommand(bodyTrimmed);
           if (cmd.error) return { error: cmd.error };
           bodyCommands.push(cmd);
           if (cmd.type === "deliver") hasDeliverCall = true;
           i++;
         }
-
-        if (bodyCommands.length === 0) {
-          return { error: "for ループの中身がありません" };
-        }
-
-        commands.push({ type: "loop", times, body: bodyCommands });
+        if (bodyCommands.length === 0) return { error: "for ループの中身がありません" };
+        commands.push({ type: "loop", times: times, body: bodyCommands });
         continue;
       }
-
-      // 通常コマンド
-      const cmd = parseCommand(trimmed);
+      var cmd = parseCommand(trimmed);
       if (cmd.error) return { error: cmd.error };
       commands.push(cmd);
       if (cmd.type === "deliver") hasDeliverCall = true;
       i++;
     }
-
-    return { commands, hasDeliverCall, hasForLoop };
+    return { commands: commands, hasDeliverCall: hasDeliverCall, hasForLoop: hasForLoop };
   }
 
   function parseCommand(s) {
-    // deliver() または deliver(N)
-    const deliverMatch = s.match(/^deliver\((\d*)\)$/);
-    if (deliverMatch) {
-      const n = deliverMatch[1] ? parseInt(deliverMatch[1]) : 1;
-      if (n > 20) return { error: `deliver(${n}) は大きすぎます（最大20）` };
+    var dm = s.match(/^deliver\((\d*)\)$/);
+    if (dm) {
+      var n = dm[1] ? parseInt(dm[1]) : 1;
+      if (n > 20) return { error: "deliver(" + n + ") は大きすぎます（最大20）" };
       return { type: "deliver", amount: n };
     }
-
-    // rest()
     if (s === "rest()") return { type: "rest" };
-
-    return { error: `「${s}」はわからないコマンドです` };
+    return { error: "「" + s + "」はわからないコマンドです" };
   }
 
   function executeCommands(commands) {
-    for (const cmd of commands) {
+    for (var j = 0; j < commands.length; j++) {
+      var cmd = commands[j];
       if (cmd.type === "deliver") deliver(cmd.amount);
       else if (cmd.type === "rest") rest();
       else if (cmd.type === "loop") {
-        for (let k = 0; k < cmd.times; k++) {
-          executeCommands(cmd.body);
-        }
+        for (var k = 0; k < cmd.times; k++) executeCommands(cmd.body);
       }
     }
   }
 
-  // ======= ユーティリティ =======
-  function animateChar(cls) {
-    const ch = document.getElementById("character");
-    ch.classList.remove("delivering", "resting");
-    ch.getBoundingClientRect(); // reflow
-    ch.classList.add(cls);
-    setTimeout(() => ch.classList.remove(cls), 1000);
+  function checkMissions() {
+    if (!missions.m1 && deliveryCount >= 1) { missions.m1 = true; completeMission("m1"); }
+    if (!missions.m4 && level >= 3)         { missions.m4 = true; completeMission("m4"); }
+    if (!missions.m5 && shopPurchased)      { missions.m5 = true; completeMission("m5"); }
+    if (!missions.m6 && level >= 5)         { missions.m6 = true; completeMission("m6"); }
+  }
+
+  function completeMission(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add("done");
   }
 
   function showCoinPop(text) {
-    const scene = document.querySelector(".scene");
-    const pop = document.createElement("div");
+    var scene = document.querySelector(".scene");
+    var pop = document.createElement("div");
     pop.className = "coin-pop";
     pop.textContent = text;
     pop.style.left = (Math.random() * 60 + 20) + "%";
     pop.style.top = "30%";
     scene.appendChild(pop);
-    setTimeout(() => pop.remove(), 1000);
+    setTimeout(function() { pop.remove(); }, 1000);
   }
 
-  function log(message, type = "") {
-    const el = document.getElementById("log");
+  function log(message, type) {
+    var el = document.getElementById("log");
     el.textContent = message;
-    el.className = type;
+    el.className = type || "";
   }
 
-  // 初期化
   updateUI();
 </script>
-
 </body>
 </html>
